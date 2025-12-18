@@ -3,26 +3,21 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Qur'an — Focus Mode</title>
+  <title>Qur’an — Focus Mode</title>
   <style>
     :root{
-      --bg:#0b0c10; --card:#12131a; --card2:#151626;
-      --fg:rgba(255,255,255,.92); --muted:rgba(255,255,255,.62);
-      --line:rgba(255,255,255,.10);
-      --accent:#8b5cf6; --accent2:#22c55e;
+      --bg:#0b0c10; --fg:rgba(255,255,255,.92); --muted:rgba(255,255,255,.62);
       --shadow: 0 24px 70px rgba(0,0,0,.45);
       --radius: 22px;
     }
     html,body{height:100%;margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;overflow:hidden;}
-    a{color:inherit}
     #app{position:fixed;inset:0;display:flex;flex-direction:column}
+
     header{
       padding:14px 14px 10px;
       display:flex;gap:12px;align-items:center;justify-content:space-between;
     }
-    .brand{
-      display:flex;align-items:center;gap:10px;min-width:180px;
-    }
+    .brand{display:flex;align-items:center;gap:10px;min-width:180px;}
     .logo{
       width:38px;height:38px;border-radius:14px;
       background: radial-gradient(120% 120% at 30% 20%, rgba(255,255,255,.20), rgba(255,255,255,0) 55%),
@@ -32,9 +27,7 @@
     .brand h1{font-size:15px;margin:0;letter-spacing:.2px}
     .brand p{margin:2px 0 0;color:var(--muted);font-size:12px}
 
-    .bar{
-      display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end;
-    }
+    .bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end;}
     .pill{
       display:flex;align-items:center;gap:10px;
       background: rgba(255,255,255,.06);
@@ -45,195 +38,164 @@
       -webkit-backdrop-filter: blur(10px);
       box-shadow: 0 12px 30px rgba(0,0,0,.22);
     }
-    select, input{
-      background: transparent;
-      border:none;
-      outline:none;
-      color: var(--fg);
-      font-weight:700;
-      font-size:13px;
-      width: 220px;
-      max-width: 64vw;
+    input{
+      background: transparent;border:none;outline:none;color: var(--fg);
+      font-weight:700;font-size:13px;width: 240px;max-width: 64vw;
     }
     input::placeholder{color:rgba(255,255,255,.35);font-weight:700}
     .btn{
-      cursor:pointer;
-      border:none;
-      border-radius:999px;
-      padding:10px 12px;
-      font-weight:900;
-      color:#0b0c10;
-      background: linear-gradient(180deg, #a78bfa, #22c55e);
+      cursor:pointer;border:none;border-radius:999px;padding:10px 12px;font-weight:900;
+      color:#0b0c10;background: linear-gradient(180deg, #a78bfa, #22c55e);
       box-shadow: 0 18px 40px rgba(34,197,94,.18);
     }
     .btn:active{transform:translateY(1px)}
     .btn.secondary{
-      background: rgba(255,255,255,.08);
-      color: var(--fg);
-      border: 1px solid rgba(255,255,255,.14);
-      box-shadow:none;
+      background: rgba(255,255,255,.08);color: var(--fg);
+      border: 1px solid rgba(255,255,255,.14);box-shadow:none;
     }
 
     main{
-      flex:1;
-      display:grid;
-      grid-template-columns: 360px 1fr;
-      gap:14px;
-      padding: 0 14px 14px;
-      min-height:0;
+      flex:1;display:grid;grid-template-columns: 360px 1fr;gap:14px;
+      padding: 0 14px 14px;min-height:0;
     }
-    @media (max-width: 900px){
-      main{grid-template-columns: 1fr; }
-    }
+    @media (max-width: 900px){ main{grid-template-columns: 1fr;} }
 
     .panel{
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
       border:1px solid rgba(255,255,255,.10);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      overflow:hidden;
-      min-height:0;
+      overflow:hidden;min-height:0;
     }
-    .panel .hd{
-      padding:14px 14px 12px;
-      border-bottom:1px solid rgba(255,255,255,.08);
+    .hd{
+      padding:14px 14px 12px;border-bottom:1px solid rgba(255,255,255,.08);
       display:flex;align-items:center;justify-content:space-between;gap:10px;
       background: rgba(0,0,0,.15);
     }
-    .panel .hd .t{
-      font-weight:900; font-size:13px; letter-spacing:.2px;
-    }
-    .panel .hd .s{
-      color:var(--muted); font-size:12px; font-weight:700;
-    }
+    .hd .t{font-weight:900;font-size:13px;letter-spacing:.2px}
+    .hd .s{color:var(--muted);font-size:12px;font-weight:700}
 
     .list{
-      padding:10px;
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-      overflow:auto;
-      max-height: calc(100% - 52px);
+      padding:10px;display:flex;flex-direction:column;gap:8px;
+      overflow:auto;max-height: calc(100% - 52px);
     }
     .item{
-      padding:12px 12px;
-      border-radius: 16px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-      cursor:pointer;
+      padding:12px;border-radius: 16px;border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);cursor:pointer;
       display:flex;align-items:center;justify-content:space-between;gap:10px;
     }
     .item:hover{background: rgba(255,255,255,.06)}
-    .item.active{
-      background: rgba(139,92,246,.18);
-      border-color: rgba(139,92,246,.35);
-    }
+    .item.active{background: rgba(139,92,246,.18);border-color: rgba(139,92,246,.35);}
     .item .n{font-weight:900;font-size:13px}
     .item .m{color:var(--muted);font-size:12px;font-weight:700}
 
-    .content{
-      display:flex;
-      flex-direction:column;
-      min-height:0;
-    }
-    .ayahs{
-      padding: 12px;
-      overflow:auto;
-      min-height:0;
-    }
+    .content{display:flex;flex-direction:column;min-height:0;}
+    .ayahs{padding: 12px;overflow:auto;min-height:0;}
     .ayah{
-      background: rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.10);
-      border-radius: 18px;
-      padding: 14px;
-      margin-bottom: 10px;
+      background: rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);
+      border-radius: 18px;padding: 14px;margin-bottom: 10px;
     }
     .ayah .meta{
       display:flex;align-items:center;justify-content:space-between;gap:10px;
-      margin-bottom:10px;
-      color: var(--muted);
-      font-size:12px;
-      font-weight:800;
+      margin-bottom:10px;color: var(--muted);font-size:12px;font-weight:800;
     }
     .ayah .arabic{
-      font-size: 26px;
-      line-height: 1.8;
-      direction: rtl;
-      text-align: right;
-      font-weight: 700;
-      letter-spacing: .2px;
+      font-size: 26px;line-height: 1.8;direction: rtl;text-align: right;
+      font-weight: 700;letter-spacing: .2px;
     }
     .ayah .tr{
-      margin-top:10px;
-      font-size: 14px;
-      line-height: 1.55;
-      color: rgba(255,255,255,.86);
-      font-weight: 700;
+      margin-top:10px;font-size: 14px;line-height: 1.55;
+      color: rgba(255,255,255,.86);font-weight: 700;
     }
-    .ayah .tools{
-      margin-top:12px;
-      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
-    }
+    .ayah .tools{margin-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
     .play{
-      cursor:pointer;
-      border:none;
-      border-radius: 999px;
-      padding: 10px 12px;
-      font-weight: 900;
-      background: rgba(255,255,255,.10);
-      color: var(--fg);
+      cursor:pointer;border:none;border-radius: 999px;padding: 10px 12px;font-weight: 900;
+      background: rgba(255,255,255,.10);color: var(--fg);
       border: 1px solid rgba(255,255,255,.14);
     }
     .play:active{transform:translateY(1px)}
     audio{width:min(520px,100%);}
 
-    /* Focus vanish */
+    /* исчезновение контента */
     #veil{
-      position:fixed; inset:0;
-      pointer-events:none;
-      opacity:0;
-      transition: opacity 260ms ease;
+      position:fixed; inset:0;pointer-events:none;opacity:0;transition: opacity 260ms ease;
       background: radial-gradient(60% 45% at 50% 35%, rgba(0,0,0,.35), rgba(0,0,0,.72));
       z-index: 50;
     }
     #focusWrap{
-      position:fixed; inset:0;
-      transition: opacity 260ms ease, filter 260ms ease, transform 260ms ease;
+      position:fixed; inset:0;transition: opacity 260ms ease, filter 260ms ease, transform 260ms ease;
       z-index: 40;
     }
     .hiddenFocus #focusWrap{
-      opacity:0;
-      filter: blur(10px);
-      transform: scale(0.98);
-      pointer-events:none;
+      opacity:0;filter: blur(10px);transform: scale(0.98);pointer-events:none;
     }
     .hiddenFocus #veil{opacity:1}
 
-    /* Camera permission modal */
+    /* модалка камеры */
     #camModal{
-      position:fixed; inset:0;
-      display:grid; place-items:center;
-      background: rgba(0,0,0,.55);
-      z-index: 60;
-      padding: 16px;
+      position:fixed; inset:0;display:grid;place-items:center;
+      background: rgba(0,0,0,.55);z-index: 60;padding: 16px;
     }
     .modal{
-      width:min(560px, 92vw);
-      border-radius: 24px;
+      width:min(560px, 92vw);border-radius: 24px;
       background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
       border: 1px solid rgba(255,255,255,.16);
       box-shadow: 0 30px 90px rgba(0,0,0,.55);
       padding: 18px;
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);-webkit-backdrop-filter: blur(14px);
     }
     .modal h2{margin:0 0 8px;font-size:16px}
     .modal p{margin:0 0 14px;color:var(--muted);font-weight:700;line-height:1.45;font-size:13px}
     .row{display:flex;gap:10px;flex-wrap:wrap}
     .small{color:rgba(255,255,255,.55);font-size:12px;font-weight:700;margin-top:10px}
 
-    /* Hidden video */
+    /* скрытая камера (для анализа) */
     #camVideo{display:none;}
+
+    /* ОКОШКО КАМЕРЫ (всегда видно) */
+    #camPreview{
+      position: fixed;
+      right: 14px;
+      bottom: 14px;
+      width: 170px;
+      height: 128px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #000;
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: 0 18px 40px rgba(0,0,0,.45);
+      z-index: 100;
+      opacity: .88;
+      transition: opacity .25s ease, transform .25s ease;
+    }
+    #camPreview.hidden{
+      opacity: .35;
+      transform: scale(.96);
+    }
+    #camPreview video{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      transform: scaleX(-1);
+      filter: saturate(1.05) contrast(1.05);
+    }
+    .camLabel{
+      position:absolute; left:8px; bottom:6px;
+      font-size:11px; font-weight:900;
+      color:rgba(255,255,255,.9);
+      background: rgba(0,0,0,.45);
+      padding:4px 8px; border-radius:999px;
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      display:flex; gap:6px; align-items:center;
+    }
+    .dot{
+      width:8px;height:8px;border-radius:999px;background:#22c55e;
+      box-shadow:0 0 12px rgba(34,197,94,.55);
+    }
+    .hiddenFocus .dot{
+      background:#ff3b3b;
+      box-shadow:0 0 12px rgba(255,59,59,.55);
+    }
   </style>
 </head>
 <body>
@@ -246,13 +208,13 @@
           <div class="logo"></div>
           <div>
             <h1>Qur’an — Focus Mode</h1>
-            <p>Присутствуешь — видно. Ушёл — исчезает.</p>
+            <p>Присутствуешь — видно. Ушёл — скрывается.</p>
           </div>
         </div>
 
         <div class="bar">
           <div class="pill">
-            <input id="search" placeholder="Поиск по переводу (быстро)" />
+            <input id="search" placeholder="Поиск по переводу (на странице)" />
           </div>
           <button class="btn secondary" id="toggleFocus">Focus: ON</button>
           <button class="btn" id="reload">Обновить</button>
@@ -266,7 +228,7 @@
               <div class="t">Суры</div>
               <div class="s" id="surahCount">—</div>
             </div>
-            <div class="s" id="statusLeft">API: AlQuran Cloud</div>
+            <div class="s">API: AlQuran Cloud</div>
           </div>
           <div class="list" id="surahList"></div>
         </section>
@@ -290,308 +252,285 @@
         <h2>Разрешить камеру?</h2>
         <p>
           Камера нужна только для “Focus Mode”: если ты ушёл от экрана — текст скрывается.
-          Когда вернёшься — всё появляется обратно (ничего никуда не отправляется).
+          Когда вернёшься — всё появляется обратно. Видео никуда не отправляется.
         </p>
         <div class="row">
           <button class="btn" id="allowCam">Разрешить</button>
           <button class="btn secondary" id="skipCam">Пропустить</button>
         </div>
-        <div class="small">
-          Камера работает только по HTTPS или localhost.
-        </div>
+        <div class="small">Камера работает только по HTTPS или localhost.</div>
       </div>
     </div>
 
+    <!-- Hidden (processing) -->
     <video id="camVideo" playsinline muted autoplay></video>
-    <audio id="player" controls style="display:none"></audio>
+
+    <!-- Camera Preview (always visible) -->
+    <div id="camPreview" style="display:none">
+      <video id="camPreviewVideo" autoplay muted playsinline></video>
+      <div class="camLabel"><span class="dot"></span><span>Presence</span></div>
+    </div>
   </div>
 
 <script>
-/**
- * API: AlQuran Cloud (free, no auth). :contentReference[oaicite:2]{index=2}
- * Audio CDN: cdn.islamic.network :contentReference[oaicite:3]{index=3}
- *
- * Реалистичная “проверка присутствия” без ИИ:
- * - берём кадры с камеры
- * - считаем среднюю разницу пикселей между кадрами (motion)
- * - если motion долго низкий => считаем “ушёл” => скрываем UI
- * - появился motion => показываем
- */
+  const API = "https://api.alquran.cloud/v1";
+  const DEFAULT_EDITION_AR = "quran-uthmani";
+  const DEFAULT_EDITION_RU = "ru.kuliev"; // если недоступен — покажем без перевода
 
-const API = "https://api.alquran.cloud/v1";
-const DEFAULT_EDITION_AR = "quran-uthmani";
-const DEFAULT_EDITION_RU = "ru.kuliev"; // популярный русский перевод в alquran.cloud (обычно доступен)
+  const el = (id)=>document.getElementById(id);
 
-const el = (id)=>document.getElementById(id);
+  const surahList = el("surahList");
+  const ayahsEl = el("ayahs");
+  const surahTitle = el("surahTitle");
+  const surahMeta = el("surahMeta");
+  const statusRight = el("statusRight");
+  const surahCount = el("surahCount");
+  const search = el("search");
+  const reloadBtn = el("reload");
+  const toggleFocusBtn = el("toggleFocus");
 
-const surahList = el("surahList");
-const ayahsEl = el("ayahs");
-const surahTitle = el("surahTitle");
-const surahMeta = el("surahMeta");
-const statusRight = el("statusRight");
-const surahCount = el("surahCount");
-const search = el("search");
-const reloadBtn = el("reload");
-const toggleFocusBtn = el("toggleFocus");
-const camModal = el("camModal");
-const allowCam = el("allowCam");
-const skipCam = el("skipCam");
-const camVideo = el("camVideo");
-const player = el("player");
+  const camModal = el("camModal");
+  const allowCam = el("allowCam");
+  const skipCam = el("skipCam");
+  const camVideo = el("camVideo");
 
-let surahs = [];
-let currentSurah = null;
-let focusOn = true;
+  const camPreview = el("camPreview");
+  const camPreviewVideo = el("camPreviewVideo");
 
-// ---------- UI helpers ----------
-function setStatus(txt){ statusRight.textContent = txt; }
-function escapeHtml(s){
-  return s.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-}
+  let surahs = [];
+  let currentSurah = null;
+  let focusOn = true;
 
-// ---------- Fetch ----------
-async function apiGet(path){
-  const r = await fetch(`${API}${path}`);
-  if(!r.ok) throw new Error(`HTTP ${r.status}`);
-  const j = await r.json();
-  if(j.status !== "OK") throw new Error(j.data?.message || "API error");
-  return j.data;
-}
-
-async function loadSurahs(){
-  setStatus("Загружаю список сур…");
-  const data = await apiGet(`/surah`);
-  surahs = data;
-  surahCount.textContent = `Всего: ${surahs.length}`;
-  renderSurahList(surahs);
-  setStatus("Выбери суру слева");
-}
-
-function renderSurahList(list){
-  surahList.innerHTML = "";
-  for(const s of list){
-    const div = document.createElement("div");
-    div.className = "item" + (currentSurah?.number===s.number ? " active":"");
-    div.innerHTML = `
-      <div>
-        <div class="n">${s.number}. ${escapeHtml(s.englishName)}</div>
-        <div class="m">${escapeHtml(s.name)} • аятов: ${s.numberOfAyahs}</div>
-      </div>
-      <div class="m">${escapeHtml(s.revelationType)}</div>
-    `;
-    div.onclick = ()=>selectSurah(s.number);
-    surahList.appendChild(div);
-  }
-}
-
-async function selectSurah(n){
-  currentSurah = surahs.find(x=>x.number===n);
-  renderSurahList(surahs);
-
-  surahTitle.textContent = `${currentSurah.number}. ${currentSurah.englishName} — ${currentSurah.name}`;
-  surahMeta.textContent = `Аятов: ${currentSurah.numberOfAyahs} • ${currentSurah.revelationType}`;
-
-  setStatus("Загружаю арабский текст…");
-  // арабский
-  const ar = await apiGet(`/surah/${n}/${DEFAULT_EDITION_AR}`);
-
-  let ru = null;
-  try{
-    setStatus("Загружаю перевод…");
-    ru = await apiGet(`/surah/${n}/${DEFAULT_EDITION_RU}`);
-  }catch(e){
-    // если конкретный перевод не доступен — покажем без перевода
-    ru = null;
+  function setStatus(txt){ statusRight.textContent = txt; }
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
   }
 
-  renderAyahs(ar.ayahs, ru?.ayahs || null);
-  setStatus(ru ? "Готово" : "Готово (без перевода)");
-}
-
-function renderAyahs(arAyahs, ruAyahs){
-  ayahsEl.innerHTML = "";
-  for(let i=0;i<arAyahs.length;i++){
-    const a = arAyahs[i];
-    const t = ruAyahs ? ruAyahs[i]?.text : null;
-
-    const card = document.createElement("div");
-    card.className = "ayah";
-    card.innerHTML = `
-      <div class="meta">
-        <div>Аят ${a.numberInSurah}</div>
-        <div>${a.juz ? `Джуз ${a.juz}` : ""}</div>
-      </div>
-      <div class="arabic">${escapeHtml(a.text)}</div>
-      ${t ? `<div class="tr">${escapeHtml(t)}</div>` : ``}
-      <div class="tools">
-        <button class="play" data-ayah="${a.number}">▶ Аудио аята</button>
-        <audio controls preload="none" style="display:none"></audio>
-      </div>
-    `;
-    ayahsEl.appendChild(card);
-
-    const btn = card.querySelector(".play");
-    const audio = card.querySelector("audio");
-
-    btn.onclick = async ()=>{
-      const globalAyahNumber = btn.getAttribute("data-ayah"); // номер аята в Коране (global)
-      // CDN пример: audio by ayah доступен через Al Quran Cloud CDN :contentReference[oaicite:4]{index=4}
-      // Для простоты используем “Alafasy” (часто: ar.alafasy). У CDN есть структуры, но здесь — прямой mp3-линк через API проще:
-      // alquran.cloud API: /ayah/{number}/ar.alafasy -> возвращает audio url
-      btn.textContent = "…";
-      try{
-        const ay = await apiGet(`/ayah/${globalAyahNumber}/ar.alafasy`);
-        audio.src = ay.audio;
-        audio.style.display = "block";
-        await audio.play();
-        btn.textContent = "⏸ Пауза / ▶ Играть";
-      }catch(e){
-        btn.textContent = "⚠ Не получилось";
-      }
-    };
+  async function apiGet(path){
+    const r = await fetch(`${API}${path}`);
+    if(!r.ok) throw new Error(`HTTP ${r.status}`);
+    const j = await r.json();
+    if(j.status !== "OK") throw new Error(j.data?.message || "API error");
+    return j.data;
   }
-}
 
-// ---------- Search (по переводу на странице) ----------
-search.addEventListener("input", ()=>{
-  const q = search.value.trim().toLowerCase();
-  if(!q){
-    // показываем все
-    for(const card of ayahsEl.querySelectorAll(".ayah")) card.style.display = "";
-    return;
+  async function loadSurahs(){
+    setStatus("Загружаю список сур…");
+    const data = await apiGet(`/surah`);
+    surahs = data;
+    surahCount.textContent = `Всего: ${surahs.length}`;
+    renderSurahList(surahs);
+    setStatus("Выбери суру слева");
   }
-  for(const card of ayahsEl.querySelectorAll(".ayah")){
-    const tr = card.querySelector(".tr")?.textContent?.toLowerCase() || "";
-    const ok = tr.includes(q);
-    card.style.display = ok ? "" : "none";
+
+  function renderSurahList(list){
+    surahList.innerHTML = "";
+    for(const s of list){
+      const div = document.createElement("div");
+      div.className = "item" + (currentSurah?.number===s.number ? " active":"");
+      div.innerHTML = `
+        <div>
+          <div class="n">${s.number}. ${escapeHtml(s.englishName)}</div>
+          <div class="m">${escapeHtml(s.name)} • аятов: ${s.numberOfAyahs}</div>
+        </div>
+        <div class="m">${escapeHtml(s.revelationType)}</div>
+      `;
+      div.onclick = ()=>selectSurah(s.number);
+      surahList.appendChild(div);
+    }
   }
-});
 
-// ---------- Focus Mode (camera presence) ----------
-toggleFocusBtn.onclick = ()=>{
-  focusOn = !focusOn;
-  toggleFocusBtn.textContent = `Focus: ${focusOn ? "ON":"OFF"}`;
-  if(!focusOn){
-    document.body.classList.remove("hiddenFocus");
+  async function selectSurah(n){
+    currentSurah = surahs.find(x=>x.number===n);
+    renderSurahList(surahs);
+
+    surahTitle.textContent = `${currentSurah.number}. ${currentSurah.englishName} — ${currentSurah.name}`;
+    surahMeta.textContent = `Аятов: ${currentSurah.numberOfAyahs} • ${currentSurah.revelationType}`;
+
+    setStatus("Загружаю арабский текст…");
+    const ar = await apiGet(`/surah/${n}/${DEFAULT_EDITION_AR}`);
+
+    let ru = null;
+    try{
+      setStatus("Загружаю перевод…");
+      ru = await apiGet(`/surah/${n}/${DEFAULT_EDITION_RU}`);
+    }catch(e){
+      ru = null;
+    }
+
+    renderAyahs(ar.ayahs, ru?.ayahs || null);
+    setStatus(ru ? "Готово" : "Готово (без перевода)");
   }
-};
 
-// Simple motion detector
-let motionLoop = null;
-let lastActive = performance.now();
-let hasCamera = false;
+  function renderAyahs(arAyahs, ruAyahs){
+    ayahsEl.innerHTML = "";
+    for(let i=0;i<arAyahs.length;i++){
+      const a = arAyahs[i];
+      const t = ruAyahs ? ruAyahs[i]?.text : null;
 
-function startPresenceDetection(){
-  // canvas for downscaled frame diff
-  const c = document.createElement("canvas");
-  const ctx = c.getContext("2d", { willReadFrequently: true });
-  const W = 96, H = 54; // маленькое — быстро
-  c.width = W; c.height = H;
+      const card = document.createElement("div");
+      card.className = "ayah";
+      card.innerHTML = `
+        <div class="meta">
+          <div>Аят ${a.numberInSurah}</div>
+          <div>${a.juz ? `Джуз ${a.juz}` : ""}</div>
+        </div>
+        <div class="arabic">${escapeHtml(a.text)}</div>
+        ${t ? `<div class="tr">${escapeHtml(t)}</div>` : ``}
+        <div class="tools">
+          <button class="play" data-ayah="${a.number}">▶ Аудио аята</button>
+          <audio controls preload="none" style="display:none"></audio>
+        </div>
+      `;
+      ayahsEl.appendChild(card);
 
-  let prev = null;
+      const btn = card.querySelector(".play");
+      const audio = card.querySelector("audio");
 
-  function tick(){
-    if(!hasCamera || !focusOn){
-      motionLoop = requestAnimationFrame(tick);
+      btn.onclick = async ()=>{
+        const globalAyahNumber = btn.getAttribute("data-ayah");
+        btn.textContent = "…";
+        try{
+          const ay = await apiGet(`/ayah/${globalAyahNumber}/ar.alafasy`);
+          audio.src = ay.audio;
+          audio.style.display = "block";
+          await audio.play();
+          btn.textContent = "⏸ Пауза / ▶ Играть";
+        }catch(e){
+          btn.textContent = "⚠ Не получилось";
+        }
+      };
+    }
+  }
+
+  // Search in translation on the current page
+  search.addEventListener("input", ()=>{
+    const q = search.value.trim().toLowerCase();
+    if(!q){
+      for(const card of ayahsEl.querySelectorAll(".ayah")) card.style.display = "";
       return;
     }
+    for(const card of ayahsEl.querySelectorAll(".ayah")){
+      const tr = card.querySelector(".tr")?.textContent?.toLowerCase() || "";
+      card.style.display = tr.includes(q) ? "" : "none";
+    }
+  });
 
-    try{
-      ctx.drawImage(camVideo, 0, 0, W, H);
-      const img = ctx.getImageData(0,0,W,H).data;
+  toggleFocusBtn.onclick = ()=>{
+    focusOn = !focusOn;
+    toggleFocusBtn.textContent = `Focus: ${focusOn ? "ON":"OFF"}`;
+    if(!focusOn){
+      document.body.classList.remove("hiddenFocus");
+      camPreview.classList.remove("hidden");
+    }
+  };
 
-      if(prev){
-        let diff = 0;
-        // шаг 4 = RGBA; берём яркость
-        for(let i=0;i<img.length;i+=16){ // пропускаем пиксели для скорости
-          const r = img[i], g = img[i+1], b = img[i+2];
-          const pr = prev[i], pg = prev[i+1], pb = prev[i+2];
-          const y = (r*3 + g*4 + b) / 8;
-          const py = (pr*3 + pg*4 + pb) / 8;
-          diff += Math.abs(y - py);
-        }
-        const score = diff / (img.length/16); // средняя разница
+  // Presence detection (simple motion)
+  let lastActive = performance.now();
+  let hasCamera = false;
 
-        // порог можно подкрутить под твою камеру
-        const MOTION_THRESHOLD = 6.5;
+  function startPresenceDetection(){
+    const c = document.createElement("canvas");
+    const ctx = c.getContext("2d", { willReadFrequently: true });
+    const W = 96, H = 54;
+    c.width = W; c.height = H;
 
-        if(score > MOTION_THRESHOLD){
-          lastActive = performance.now();
-          if(document.body.classList.contains("hiddenFocus")){
-            document.body.classList.remove("hiddenFocus");
-          }
-        }else{
-          // если долго “тихо” — считаем, что ушёл
-          const idleMs = performance.now() - lastActive;
-          if(idleMs > 1800){
-            document.body.classList.add("hiddenFocus");
-          }
-        }
+    let prev = null;
+
+    function tick(){
+      if(!hasCamera || !focusOn){
+        requestAnimationFrame(tick);
+        return;
       }
 
-      prev = img.slice(0); // копия
-    }catch(e){
-      // если drawImage падает (не прогрузилось) — игнор
-    }
+      try{
+        ctx.drawImage(camVideo, 0, 0, W, H);
+        const img = ctx.getImageData(0,0,W,H).data;
 
-    motionLoop = requestAnimationFrame(tick);
+        if(prev){
+          let diff = 0;
+          for(let i=0;i<img.length;i+=16){
+            const y  = (img[i]*3 + img[i+1]*4 + img[i+2]) / 8;
+            const py = (prev[i]*3 + prev[i+1]*4 + prev[i+2]) / 8;
+            diff += Math.abs(y - py);
+          }
+          const score = diff / (img.length/16);
+          const MOTION_THRESHOLD = 6.5;
+
+          if(score > MOTION_THRESHOLD){
+            lastActive = performance.now();
+            if(document.body.classList.contains("hiddenFocus")){
+              document.body.classList.remove("hiddenFocus");
+            }
+            camPreview.classList.remove("hidden");
+          }else{
+            const idleMs = performance.now() - lastActive;
+            if(idleMs > 1800){
+              document.body.classList.add("hiddenFocus");
+              camPreview.classList.add("hidden");
+            }
+          }
+        }
+
+        prev = img.slice(0);
+      }catch(e){}
+
+      requestAnimationFrame(tick);
+    }
+    tick();
   }
 
-  tick();
-}
+  async function requestCamera(){
+    try{
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: "user", width:{ ideal:1280 }, height:{ ideal:720 } },
+        audio: false
+      });
 
-async function requestCamera(){
-  try{
-    const stream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: "user", width:{ ideal:1280 }, height:{ ideal:720 } },
-      audio: false
-    });
-    camVideo.srcObject = stream;
-    await camVideo.play();
-    hasCamera = true;
-    startPresenceDetection();
-  }catch(e){
-    hasCamera = false;
+      // один поток → два video (скрытый для анализа + видимый preview)
+      camVideo.srcObject = stream;
+      camPreviewVideo.srcObject = stream;
+
+      await Promise.all([camVideo.play(), camPreviewVideo.play()]);
+
+      camPreview.style.display = "block";
+      hasCamera = true;
+      startPresenceDetection();
+    }catch(e){
+      hasCamera = false;
+      focusOn = false;
+      toggleFocusBtn.textContent = "Focus: OFF";
+    }
+  }
+
+  allowCam.onclick = async ()=>{
+    camModal.style.display = "none";
+    await requestCamera();
+  };
+  skipCam.onclick = ()=>{
+    camModal.style.display = "none";
     focusOn = false;
     toggleFocusBtn.textContent = "Focus: OFF";
-    // Просто работаем без “исчезновения”
-  }
-}
+  };
 
-// Modal logic
-allowCam.onclick = async ()=>{
-  camModal.style.display = "none";
-  await requestCamera();
-};
-skipCam.onclick = ()=>{
-  camModal.style.display = "none";
-  focusOn = false;
-  toggleFocusBtn.textContent = "Focus: OFF";
-};
+  document.addEventListener("visibilitychange", ()=>{
+    if(document.hidden){
+      document.body.classList.add("hiddenFocus");
+      camPreview.classList.add("hidden");
+    }else{
+      if(!focusOn){
+        document.body.classList.remove("hiddenFocus");
+        camPreview.classList.remove("hidden");
+      }
+    }
+  });
 
-// Pause when tab hidden
-document.addEventListener("visibilitychange", ()=>{
-  if(document.hidden){
-    document.body.classList.add("hiddenFocus");
-  }else{
-    // возвращаем видимость, но если focusOn и камера — presence сам решит
-    if(!focusOn) document.body.classList.remove("hiddenFocus");
-  }
-});
+  reloadBtn.onclick = ()=>location.reload();
 
-// Reload
-reloadBtn.onclick = ()=>{
-  location.reload();
-};
-
-// Init
-(async ()=>{
-  try{
-    await loadSurahs();
-  }catch(e){
-    setStatus("Ошибка загрузки API. Проверь интернет.");
-  }
-})();
+  (async ()=>{
+    try{ await loadSurahs(); }
+    catch(e){ setStatus("Ошибка API. Проверь интернет."); }
+  })();
 </script>
 </body>
 </html>
