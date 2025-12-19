@@ -3,307 +3,825 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🕌 دليل الميراث والفرائض مع الحاسبة الذكية</title>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@500;700;900&display=swap" rel="stylesheet">
+    <title>دليل دراسة علم الميراث والفرائض</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+       
         body {
             font-family: 'Amiri', serif;
-            background: url('https://png.pngtree.com/thumb_back/fw800/background/20251117/pngtree-golden-islamic-ornamentation-with-arabic-calligraphy-image_20391541.webp') no-repeat center center fixed;
-            background-size: cover;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 15px;
-            color: #f0f0f0;
-            line-height: 1.9;
-            position: relative;
+            padding: 20px;
+            line-height: 1.8;
         }
-        
-        #particles {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-        
+       
         .container {
             max-width: 1400px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr 400px;
             gap: 20px;
-            position: relative;
-            z-index: 2;
         }
-        
-        @media (min-width: 992px) {
-            .container { grid-template-columns: 1fr 420px; }
+       
+        .main-content {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            max-height: 90vh;
+            overflow-y: auto;
         }
-        
-        .main-content, .calculator {
-            background: rgba(10, 20, 40, 0.88);
-            backdrop-filter: blur(12px);
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.7);
-            border: 2px solid #d4af37;
-        }
-        
+       
         .calculator {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            max-height: 90vh;
+            overflow-y: auto;
             position: sticky;
-            top: 15px;
+            top: 20px;
         }
-        
+       
         h1 {
             font-family: 'Tajawal', sans-serif;
-            color: #d4af37;
+            color: #667eea;
             text-align: center;
             margin-bottom: 30px;
-            font-size: 2.8em;
-            text-shadow: 0 0 20px #d4af37;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
-        
+       
         h2 {
             font-family: 'Tajawal', sans-serif;
-            color: #d4af37;
-            background: rgba(212, 175, 55, 0.2);
-            padding: 15px;
-            border-radius: 15px;
-            text-align: center;
-            margin: 30px 0 20px;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            color: #764ba2;
+            margin: 25px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            font-size: 1.8em;
         }
-        
+       
+        h3 {
+            font-family: 'Tajawal', sans-serif;
+            color: #667eea;
+            margin: 20px 0 10px;
+            font-size: 1.4em;
+        }
+       
+        h4 {
+            font-family: 'Tajawal', sans-serif;
+            color: #764ba2;
+            margin: 15px 0 8px;
+        }
+       
         .tabs {
             display: flex;
             gap: 10px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
-            justify-content: center;
         }
-        
+       
         .tab {
-            padding: 12px 20px;
-            background: rgba(212, 175, 55, 0.2);
-            border: 2px solid #d4af37;
-            border-radius: 50px;
+            padding: 12px 24px;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 8px;
             cursor: pointer;
-            font-family: 'Tajawal', sans-serif;
+            transition: all 0.3s;
+            font-size: 16px;
             font-weight: bold;
-            transition: 0.4s;
+            font-family: 'Tajawal', sans-serif;
         }
-        
-        .tab.active, .tab:hover {
-            background: #d4af37;
-            color: #0a1428;
-            box-shadow: 0 0 20px #d4af37;
+       
+        .tab:hover {
+            background: #e0e0e0;
+            transform: translateY(-2px);
         }
-        
-        .content-section { display: none; animation: fadeIn 0.6s; }
-        .content-section.active { display: block; }
-        
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        
+       
+        .tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+       
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+       
+        .content-section.active {
+            display: block;
+        }
+       
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+       
         .card {
-            background: rgba(255,255,255,0.1);
+            background: #f8f9ff;
             padding: 20px;
             margin: 15px 0;
-            border-radius: 15px;
-            border-right: 6px solid #d4af37;
-            transition: 0.4s;
+            border-radius: 10px;
+            border-right: 5px solid #667eea;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
         }
-        
-        .card:hover { transform: translateY(-8px); box-shadow: 0 10px 30px rgba(212,175,55,0.5); }
-        
-        img.diagram {
-            width: 100%;
-            border-radius: 15px;
-            margin: 20px 0;
-            border: 3px solid #d4af37;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+       
+        .card:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
-        
+       
+        .highlight {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-right: 4px solid #ffc107;
+        }
+       
+        .verse {
+            background: #d4edda;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-right: 4px solid #28a745;
+            font-style: italic;
+        }
+       
+        ul, ol {
+            margin: 15px 0;
+            padding-right: 30px;
+        }
+       
+        li {
+            margin: 8px 0;
+            line-height: 1.8;
+        }
+       
         .calc-title {
-            color: #d4af37;
-            font-size: 2em;
+            font-family: 'Tajawal', sans-serif;
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 20px;
             text-align: center;
-            margin-bottom: 25px;
-            text-shadow: 0 0 15px #d4af37;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #764ba2;
         }
-        
-        .heir-group { margin: 15px 0; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 12px; }
-        
+       
+        .heir-group {
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f9ff;
+            border-radius: 8px;
+        }
+       
+        .heir-group h4 {
+            color: #764ba2;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+       
         .checkbox-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin: 10px 0;
-            padding: 10px;
-            border-radius: 8px;
-            transition: 0.3s;
+            gap: 10px;
+            margin: 8px 0;
+            padding: 8px;
+            border-radius: 5px;
+            transition: background 0.2s;
         }
-        
-        .checkbox-item:hover { background: rgba(212,175,55,0.2); }
-        
+       
+        .checkbox-item:hover {
+            background: #e8e9ff;
+        }
+       
+        .checkbox-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+       
+        .checkbox-item label {
+            cursor: pointer;
+            font-size: 15px;
+        }
+       
         .number-input {
             width: 70px;
-            padding: 8px;
-            border: 2px solid #d4af37;
-            border-radius: 8px;
+            padding: 5px;
+            margin-left: 10px;
+            border: 2px solid #667eea;
+            border-radius: 5px;
             text-align: center;
-            background: rgba(0,0,0,0.3);
-            color: white;
+            font-size: 15px;
         }
-        
+       
+        .result-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+        }
+       
+        .result-box h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+       
+        .result-item {
+            background: rgba(255,255,255,0.2);
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.1em;
+        }
+       
         .btn-calculate, .btn-reset {
             width: 100%;
             padding: 15px;
             border: none;
-            border-radius: 12px;
-            font-size: 1.2em;
+            border-radius: 8px;
+            font-size: 18px;
             font-weight: bold;
-            margin-top: 15px;
             cursor: pointer;
-            transition: 0.4s;
+            margin-top: 15px;
+            transition: all 0.3s;
             font-family: 'Tajawal', sans-serif;
         }
-        
+       
         .btn-calculate {
-            background: linear-gradient(45deg, #d4af37, #ffd700);
-            color: #0a1428;
+            background: #28a745;
+            color: white;
         }
-        
-        .btn-calculate:hover { transform: scale(1.05); box-shadow: 0 0 30px #d4af37; }
-        
-        .result-box {
-            background: linear-gradient(135deg, #d4af37, #b8860b);
-            color: #0a1428;
-            padding: 20px;
-            border-radius: 15px;
-            margin-top: 20px;
-            text-align: center;
+       
+        .btn-calculate:hover {
+            background: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
         }
-        
-        .result-item {
-            background: rgba(255,255,255,0.3);
-            padding: 12px;
-            margin: 10px 0;
+       
+        .btn-reset {
+            background: #dc3545;
+            color: white;
+        }
+       
+        .btn-reset:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+        }
+       
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            .calculator {
+                position: static;
+                max-height: none;
+            }
+        }
+       
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+       
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
             border-radius: 10px;
-            font-weight: bold;
+        }
+       
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
-    <div id="particles"></div>
-    
     <div class="container">
         <div class="main-content">
-            <h1><i class="fas fa-mosque"></i> دليل علم الميراث والفرائض <i class="fas fa-balance-scale"></i></h1>
-
-<grok-card data-id="7344ce" data-type="image_card"></grok-card>
-
-
-
-<grok-card data-id="3a7ddd" data-type="image_card"></grok-card>
-
-
-
-<grok-card data-id="115cbe" data-type="image_card"></grok-card>
-
-
-
-<grok-card data-id="e74054" data-type="image_card"></grok-card>
-
-
-
-<grok-card data-id="717f62" data-type="image_card"></grok-card>
-
-            
+            <h1><i class="fas fa-mosque"></i> دليل دراسة علم الميراث والفرائض</h1>
+           
             <div class="tabs">
-                <button class="tab active" onclick="showTab('basics')">المقدمة</button>
-                <button class="tab" onclick="showTab('shares')">السهام</button>
+                <button class="tab active" onclick="showTab('basics')">المقدمة والتعاريف</button>
+                <button class="tab" onclick="showTab('shares')">السهام المقدرة</button>
                 <button class="tab" onclick="showTab('heirs')">أحوال الورثة</button>
                 <button class="tab" onclick="showTab('asaba')">العصبة</button>
                 <button class="tab" onclick="showTab('hajb')">الحجب</button>
+                <button class="tab" onclick="showTab('cases')">الحالات الخاصة</button>
             </div>
-            
-            <!-- أقسام المحتوى كاملة زي السابق (انسخها هنا للاختصار) -->
-            <!-- مثال: قسم العصبة مع صورة -->
+           
+            <div id="basics" class="content-section active">
+                <h2><i class="fas fa-book"></i> المقدمة والتعاريف الأساسية</h2>
+               
+                <div class="card">
+                    <h3>تعريف الميراث</h3>
+                    <p><strong>لغة:</strong> مصدر من وَرِثَ يَرِثُ، ومعناه: انتقال شيء من شخص إلى شخص آخر</p>
+                    <p><strong>اصطلاحاً:</strong> عبارة عن انتقال ملك أحد بسبب الموت إلى ورثته الشرعية</p>
+                </div>
+               
+                <div class="card">
+                    <h3>تعريف علم الفرائض</h3>
+                    <p>علم يبحث فيه عن انتقال ملك الميت إلى ورثته الأحياء، وعن أحوال تلك الورثة، وعن السهام المقدرة لكل واحد منهم، وعن تقسيمها</p>
+                </div>
+               
+                <div class="highlight">
+                    <h3>موضوع علم الميراث</h3>
+                    <p>السهام المقدرة ومستحقوها، أو التركة ومستحقها وقسمتها</p>
+                </div>
+               
+                <div class="highlight">
+                    <h3>غاية علم الميراث</h3>
+                    <p>إيصال الحقوق (السهام) إلى الورثة أعني إلى مستحقيها، أو حفظ حقوق الأرامل والأيتام عن الضياع</p>
+                </div>
+               
+                <div class="card">
+                    <h3>مصادر علم الميراث</h3>
+                    <ol>
+                        <li><strong>الكتاب:</strong> آيات الميراث في سورة النساء والأنفال والأحزاب</li>
+                        <li><strong>السنة:</strong> أحاديث النبي ﷺ في الفرائض</li>
+                        <li><strong>الإجماع:</strong> إجماع الصحابة والتابعين</li>
+                    </ol>
+                </div>
+               
+                <div class="verse">
+                    <strong>الحديث الأساسي:</strong> «ألحقوا الفرائض بأهلها فما بقي فلأولى رجل ذكر» (متفق عليه)
+                </div>
+               
+                <h2>المصطلحات الأساسية</h2>
+               
+                <div class="card">
+                    <ul>
+                        <li><strong>الفرض:</strong> النصيب المقرر شرعاً للوارث</li>
+                        <li><strong>السهم:</strong> الجزء المعيّن الذي يعطى لكل وارث</li>
+                        <li><strong>التركة:</strong> ما تركه الميت من الأموال والحقوق</li>
+                        <li><strong>النسب:</strong> البنوة والأبوة والإدلاء بأحدهما</li>
+                        <li><strong>الوارث:</strong> من يستحق سهماً من التركة</li>
+                        <li><strong>العصبة:</strong> من لا يكون له سهم مقدر ويأخذ ما بقي</li>
+                        <li><strong>الإدلاء:</strong> النسبة إلى الميت بأي طريق</li>
+                    </ul>
+                </div>
+               
+                <h2>أركان الميراث</h2>
+                <div class="card">
+                    <ol>
+                        <li><strong>المورث:</strong> الميت الذي ترك ميراثاً</li>
+                        <li><strong>الوارث:</strong> الذي يستحق الميراث بسبب من أسباب الإرث</li>
+                        <li><strong>الموروث:</strong> التركة والميراث</li>
+                    </ol>
+                </div>
+               
+                <h2>أسباب الإرث</h2>
+                <div class="card">
+                    <ol>
+                        <li><strong>الزوجية</strong></li>
+                        <li><strong>القرابة</strong></li>
+                        <li><strong>الولاء:</strong> ولاء العتق وولاء الموالاة</li>
+                    </ol>
+                </div>
+               
+                <h2>شروط الإرث</h2>
+                <div class="highlight">
+                    <ol>
+                        <li>موت المورث</li>
+                        <li>حياة الوارث</li>
+                        <li>انتفاء الموانع (القتل، الرق، اختلاف الدين)</li>
+                    </ol>
+                </div>
+               
+                <h2>موانع الإرث الأربعة</h2>
+                <div class="card">
+                    <ol>
+                        <li><strong>الرق:</strong> القن، المكاتب، المدبر، أم الولد</li>
+                        <li><strong>القتل:</strong> الموجب للقصاص أو الكفارة</li>
+                        <li><strong>اختلاف الدين:</strong> لا يرث الكافر المسلم ولا المسلم الكافر</li>
+                        <li><strong>اختلاف الدارين:</strong> بالنسبة للكفار القاطنين في دار الحرب</li>
+                    </ol>
+                </div>
+               
+                <h2>الحقوق المتعلقة بتركة الميت (مرتبة)</h2>
+                <div class="card">
+                    <ol>
+                        <li>تكفينه وتجهيزه ودفنه</li>
+                        <li>قضاء ديونه من جميع ما بقي</li>
+                        <li>تنفيذ وصاياه من ثلث ما بقي</li>
+                        <li>تقسيم الباقي بين ورثته</li>
+                    </ol>
+                </div>
+            </div>
+           
+            <div id="shares" class="content-section">
+                <h2>السهام المقدرة في كتاب الله</h2>
+               
+                <div class="highlight">
+                    <h3>السهام الستة</h3>
+                    <ol>
+                        <li>النصف (١/٢)</li>
+                        <li>الربع (١/٤)</li>
+                        <li>الثمن (١/٨)</li>
+                        <li>الثلثان (٢/٣)</li>
+                        <li>الثلث (١/٣)</li>
+                        <li>السدس (١/٦)</li>
+                    </ol>
+                </div>
+               
+                <h2>المستحقون لهذه السهام</h2>
+               
+                <div class="card">
+                    <h3>أربعة من الرجال:</h3>
+                    <ul>
+                        <li>الأب</li>
+                        <li>الجد الصحيح (أب الأب) وإن علا</li>
+                        <li>الأخ لأم</li>
+                        <li>الزوج</li>
+                    </ul>
+                </div>
+               
+                <div class="card">
+                    <h3>ثمان من النساء:</h3>
+                    <ul>
+                        <li>الزوجة</li>
+                        <li>البنت</li>
+                        <li>بنت الابن وإن سفلت</li>
+                        <li>الأخت الشقيقة (لأب وأم)</li>
+                        <li>الأخت لأب</li>
+                        <li>الأخت لأم</li>
+                        <li>الأم</li>
+                        <li>الجدة الصحيحة</li>
+                    </ul>
+                </div>
+               
+                <div class="verse">
+                    <strong>تعريف الجدة الصحيحة:</strong> التي لا يدخل في نسبتها إلى الميت جد فاسد (مثل أم الأب أو أم الأم)
+                </div>
+               
+                <div class="verse">
+                    <strong>تعريف الجد الصحيح:</strong> الذي لا تدخل في نسبته إلى الميت أنثى (مثل أب الأب وإن علا)
+                </div>
+            </div>
+           
+            <div id="heirs" class="content-section">
+                <h2>أحوال الورثة التفصيلية</h2>
+               
+                <div class="card">
+                    <h3>١. أحوال الأب (ثلاث أحوال)</h3>
+                    <ol>
+                        <li><strong>الفرض المطلق (السدس):</strong> مع ابن الميت أو ابن ابنه وإن سفل</li>
+                        <li><strong>الفرض والتعصيب معاً:</strong> مع بنت الميت أو بنت ابنه (السدس فرضاً والباقي تعصيباً)</li>
+                        <li><strong>التعصيب المحض:</strong> عند عدم الفرع الوارث (يأخذ كل المال أو الباقي)</li>
+                    </ol>
+                </div>
+               
+                <div class="card">
+                    <h3>٢. أحوال الجد الصحيح (مثل الأب مع فروق)</h3>
+                    <p>يأخذ مثل الأب في الأحوال الثلاث، لكنه يسقط بالأب.</p>
+                    <h4>الفروق الرئيسية بين الأب والجد:</h4>
+                    <ol>
+                        <li>أم الأب ترث مع الجد ولا ترث مع الأب</li>
+                        <li>الأم تأخذ ثلث الباقي مع الأب والزوج، وثلث المال كله مع الجد</li>
+                        <li>الإخوة يسقطون بالأب، ويأخذون مع الجد (في مذهب الجمهور)</li>
+                    </ol>
+                </div>
+               
+                <div class="card">
+                    <h3>٣. أحوال الإخوة لأم</h3>
+                    <ol>
+                        <li><strong>السدس:</strong> للواحد (ذكراً كان أو أنثى)</li>
+                        <li><strong>الثلث:</strong> للاثنين فأكثر بالتساوي</li>
+                        <li><strong>السقوط:</strong> بالولد، ولد الابن، الأب، والجد</li>
+                    </ol>
+                </div>
+               
+                <div class="card">
+                    <h3>٤. أحوال الزوج</h3>
+                    <ol>
+                        <li><strong>النصف:</strong> إذا لم يكن للزوجة فرع وارث</li>
+                        <li><strong>الربع:</strong> إذا كان لها فرع وارث</li>
+                    </ol>
+                </div>
+               
+                <div class="card">
+                    <h3>٥. أحوال الزوجة (أو الزوجات)</h3>
+                    <ol>
+                        <li><strong>الربع:</strong> إذا لم يكن للزوج فرع وارث</li>
+                        <li><strong>الثمن:</strong> إذا كان له فرع وارث</li>
+                    </ol>
+                </div>
+               
+                <div class="card">
+                    <h3>٦. أحوال البنات الصلبيات</h3>
+                    <ol>
+                        <li><strong>النصف:</strong> للواحدة</li>
+                        <li><strong>الثلثان:</strong> للاثنتين فأكثر</li>
+                        <li><strong>التعصيب:</strong> مع الابن (للذكر مثل حظ الأنثيين)</li>
+                    </ol>
+                </div>
+               
+                <div class="card">
+                    <h3>٧. أحوال بنات الابن</h3>
+                    <ol>
+                        <li><strong>النصف:</strong> للواحدة إذا لم توجد بنت صلبية</li>
+                        <li><strong>الثلثان:</strong> للاثنتين فأكثر إذا لم توجد بنت صلبية</li>
+                        <li><strong>السدس:</strong> مع البنت الصلبية الواحدة تكملة الثلثين</li>
+                        <li><strong>التعصيب:</strong> إذا وجد ابن ابن في درجتهن أو أسفل</li>
+                        <li><strong>السقوط:</strong> بالابن أو بالبنتين الصلبيتين فأكثر</li>
+                    </ol>
+                </div>
+               
+                <div class="card">
+                    <h3>٨. أحوال الأخوات الشقيقات</h3>
+                    <ol>
+                        <li><strong>النصف:</strong> للواحدة</li>
+                        <li><strong>الثلثان:</strong> للاثنتين فأكثر</li>
+                        <li><strong>التعصيب:</strong> مع الأخ الشقيق</li>
+                        <li><strong>العصبة مع الغير:</strong> مع البنات أو بنات الابن</li>
+                        <li><strong>السقوط:</strong> بالابن، ابن الابن، الأب، الجد</li>
+                    </ol>
+                </div>
+               
+                <div class="card">
+                    <h3>٩. أحوال الأخوات لأب</h3>
+                    <ol>
+                        <li><strong>النصف:</strong> للواحدة إذا لم توجد شقيقة</li>
+                        <li><strong>الثلثان:</strong> للاثنتين فأكثر إذا لم توجد شقيقة</li>
+                        <li><strong>السدس:</strong> مع الشقيقة الواحدة تكملة الثلثين</li>
+                        <li><strong>التعصيب:</strong> مع الأخ لأب</li>
+                        <li><strong>العصبة مع الغير:</strong> مع البنات أو بنات الابن</li>
+                        <li><strong>السقوط:</strong> بالشقيقتين فأكثر، أو بالابن، ابن الابن، الأب، الجد، الأخ الشقيق</li>
+                    </ol>
+                </div>
+               
+                <div class="card">
+                    <h3>١٠. أحوال الأم</h3>
+                    <ol>
+                        <li><strong>السدس:</strong> مع الفرع الوارث أو مع متعدد الإخوة والأخوات</li>
+                        <li><strong>الثلث:</strong> إذا لم يوجد فرع وارث ولا متعدد إخوة</li>
+                        <li><strong>ثلث الباقي:</strong> في الغراوين (مع الزوج أو الزوجة وأحد الأبوين)</li>
+                    </ol>
+                </div>
+               
+                <div class="card">
+                    <h3>١١. أحوال الجدة</h3>
+                    <ol>
+                        <li><strong>السدس:</strong> للواحدة أو المتعددات في درجة واحدة</li>
+                        <li><strong>السقوط:</strong> بالأم، والجدات البعيدات بالقريبة، والجدات الأبوية بالأب أو الجد (إلا أم الأب عند بعض)</li>
+                    </ol>
+                </div>
+            </div>
+           
             <div id="asaba" class="content-section">
                 <h2>العصبة وأقسامها</h2>
-
-<grok-card data-id="8f142c" data-type="image_card"></grok-card>
-
-                <!-- باقي النص -->
+               
+                <div class="highlight">
+                    <h3>تعريف العصبة</h3>
+                    <p><strong>لغة:</strong> قرابة الرجل من جهة أبيه</p>
+                    <p><strong>اصطلاحاً:</strong> من ليس له فرض مقدر، فيأخذ ما بقي بعد أصحاب الفروض، أو كل التركة إذا انفرد</p>
+                </div>
+               
+                <h2>أقسام العصبة النسبية</h2>
+               
+                <div class="card">
+                    <h3>١. العصبة بالنفس</h3>
+                    <p>كل ذكر ليس في نسبته إلى الميت أنثى</p>
+                    <h4>الأصناف الأربعة مرتبة:</h4>
+                    <ol>
+                        <li><strong>عصبة البنوة:</strong> الابن، وابن الابن وإن سفل</li>
+                        <li><strong>عصبة الأبوة:</strong> الأب، والجد الصحيح وإن علا</li>
+                        <li><strong>عصبة الأخوة:</strong> الأخ الشقيق، ثم الأخ لأب، ثم ابنهما وإن سفل</li>
+                        <li><strong>عصبة العمومة:</strong> العم الصحيح، وابن العم وإن سفل</li>
+                    </ol>
+                    <div class="highlight">
+                        <strong>قواعد الترجيح:</strong>
+                        <ol>
+                            <li>الأقرب درجة يحجب الأبعد</li>
+                            <li>الأقوى قرابة (ذو القرابتين على ذي القرابة الواحدة)</li>
+                            <li>الأعلى صنفاً يحجب الأدنى</li>
+                        </ol>
+                    </div>
+                </div>
+               
+                <div class="card">
+                    <h3>٢. العصبة بالغير</h3>
+                    <p>الأنثى صاحبة الفرض إذا انضم إليها أخوها الذكر</p>
+                    <ul>
+                        <li>البنت مع الابن</li>
+                        <li>بنت الابن مع ابن الابن في درجتها أو أسفل</li>
+                        <li>الأخت الشقيقة مع الأخ الشقيق</li>
+                        <li>الأخت لأب مع الأخ لأب</li>
+                    </ul>
+                    <p>(للذكر مثل حظ الأنثيين)</p>
+                </div>
+               
+                <div class="card">
+                    <h3>٣. العصبة مع الغير</h3>
+                    <p>الأخت الشقيقة أو لأب مع البنت أو بنت الابن (تصبح عصبة مع وجود صاحبة فرض من غير صنفها)</p>
+                </div>
             </div>
-            
-            <!-- باقي الأقسام... -->
+           
+            <div id="hajb" class="content-section">
+                <h2>الحجب في الميراث</h2>
+               
+                <div class="card">
+                    <h3>تعريف الحجب</h3>
+                    <p>منع وارث من الإرث كله أو بعضه بسبب وجود وارث آخر</p>
+                </div>
+               
+                <div class="card">
+                    <h3>١. حجب الحرمان</h3>
+                    <p>منع الوارث من الميراث كلياً</p>
+                    <p><strong>أمثلة:</strong></p>
+                    <ul>
+                        <li>الأب يحجب الجد</li>
+                        <li>الابن يحجب ابن الابن</li>
+                        <li>البنتين تحجبان بنات الابن</li>
+                        <li>الأب يحجب الإخوة والأخوات</li>
+                    </ul>
+                    <div class="highlight">
+                        <strong>الستة الذين لا يحجبون حجب حرمان أبدًا:</strong><br>
+                        الأب - الأم - الابن - البنت - الزوج - الزوجة
+                    </div>
+                </div>
+               
+                <div class="card">
+                    <h3>٢. حجب النقصان</h3>
+                    <p>انتقال الوارث من فرض أعلى إلى فرض أدنى</p>
+                    <p><strong>أمثلة:</strong></p>
+                    <ul>
+                        <li>الزوج من النصف إلى الربع بوجود الفرع الوارث</li>
+                        <li>الزوجة من الربع إلى الثمن بوجود الفرع الوارث</li>
+                        <li>الأم من الثلث إلى السدس بوجود الفرع أو متعدد الإخوة</li>
+                    </ul>
+                </div>
+            </div>
+           
+            <div id="cases" class="content-section">
+                <h2>الحالات الخاصة في الميراث</h2>
+               
+                <div class="card">
+                    <h3>١. الغراوين (مسألتا عمر بن الخطاب)</h3>
+                    <p>زوج + أم + أب (أو جد) → الأم تأخذ ثلث الباقي لا ثلث الكل</p>
+                    <p>زوجة + أم + أب → نفس الحكم</p>
+                </div>
+               
+                <div class="card">
+                    <h3>٢. ذوو الأرحام</h3>
+                    <p>يرثون عند عدم أصحاب الفروض والعصبات (مثل بنات الأخوات، أولاد الأخوات، الخالات، إلخ)</p>
+                </div>
+               
+                <div class="card">
+                    <h3>٣. الحمل</h3>
+                    <p>يوقف توزيع الميراث حتى الولادة، ويُعطى أكثر الحالين (ذكر أو أنثى)</p>
+                </div>
+               
+                <div class="card">
+                    <h3>٤. الخنثى المشكل</h3>
+                    <p>يُعطى أقل الحالين حتى يتبين أمره</p>
+                </div>
+               
+                <div class="card">
+                    <h3>٥. المجموعة الكلالة</h3>
+                    <p>من مات ولم يترك ولداً ولا والداً</p>
+                </div>
+            </div>
         </div>
-        
+
+        <!-- الجانب الأيمن: حاسبة الميراث (بسيطة) -->
         <div class="calculator">
-            <h3 class="calc-title"><i class="fas fa-calculator"></i> حاسبة الميراث الذكية</h3>
+            <h3 class="calc-title"><i class="fas fa-calculator"></i> حاسبة الميراث البسيطة</h3>
             
-            <!-- الحقول المحسنة (أضفت جد، إخوة، أخوات، إلخ) -->
             <div class="heir-group">
                 <h4>الزوج/الزوجة</h4>
-                <div class="checkbox-item"><input type="checkbox" id="husband"><label for="husband">زوج</label></div>
-                <div class="checkbox-item"><input type="checkbox" id="wife"><label for="wife">زوجة/زوجات</label><input type="number" class="number-input" id="wifeCount" min="1" max="4" value="1" style="display:none;"></div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="husband">
+                    <label for="husband">زوج (حي)</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="wife">
+                    <label for="wife">زوجة (أو زوجات)</label>
+                    <input type="number" class="number-input" id="wifeCount" min="1" max="4" value="1" style="display:none;">
+                </div>
             </div>
-            
+
             <div class="heir-group">
                 <h4>الأصول</h4>
-                <div class="checkbox-item"><input type="checkbox" id="father"><label for="father">أب</label></div>
-                <div class="checkbox-item"><input type="checkbox" id="mother"><label for="mother">أم</label></div>
-                <div class="checkbox-item"><input type="checkbox" id="grandfather"><label for="grandfather">جد (أب الأب)</label></div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="father">
+                    <label for="father">أب</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="mother">
+                    <label for="mother">أم</label>
+                </div>
             </div>
-            
+
             <div class="heir-group">
                 <h4>الفروع</h4>
-                <div class="checkbox-item"><input type="checkbox" id="son"><label for="son">ابن/أبناء</label><input type="number" class="number-input" id="sonCount" min="1" value="1" style="display:none;"></div>
-                <div class="checkbox-item"><input type="checkbox" id="daughter"><label for="daughter">بنت/بنات</label><input type="number" class="number-input" id="daughterCount" min="1" value="1" style="display:none;"></div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="son">
+                    <label for="son">ابن (أو أكثر)</label>
+                    <input type="number" class="number-input" id="sonCount" min="1" value="1" style="display:none;">
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="daughter">
+                    <label for="daughter">بنت (أو أكثر)</label>
+                    <input type="number" class="number-input" id="daughterCount" min="1" value="1" style="display:none;">
+                </div>
             </div>
-            
-            <div class="heir-group">
-                <h4>الإخوة والأخوات</h4>
-                <div class="checkbox-item"><input type="checkbox" id="brother"><label for="brother">أخ شقيق</label></div>
-                <div class="checkbox-item"><input type="checkbox" id="sister"><label for="sister">أخت شقيقة</label></div>
-            </div>
-            
-            <button class="btn-calculate" onclick="calculateInheritance()">احسب الآن</button>
-            <button class="btn-reset" onclick="resetCalculator()">إعادة</button>
-            
+
+            <button class="btn-calculate" onclick="calculateInheritance()">احسب الميراث</button>
+            <button class="btn-reset" onclick="resetCalculator()">إعادة تعيين</button>
+
             <div id="result" class="result-box" style="display:none;">
-                <h3>النتيجة الشرعية</h3>
+                <h3>نتيجة التقسيم</h3>
                 <div id="result-content"></div>
             </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        particlesJS("particles", {
-            particles: { number: { value: 100 }, color: { value: "#d4af37" }, shape: { type: "star" }, opacity: { value: 0.6 }, size: { value: 4 }, move: { enable: true, speed: 1.5 } },
-            interactivity: { events: { onhover: { enable: true, mode: "repulse" } } }
-        });
-        
-        function showTab(id) {
-            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            document.querySelector(`button[onclick="showTab('${id}')"]`).classList.add('active');
+        function showTab(tabId) {
+            document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            document.querySelector(`button[onclick="showTab('${tabId}')"]`).classList.add('active');
         }
-        
-        // حاسبة محسنة (أكثر دقة)
+
+        // دالة بسيطة لحساب الميراث (قواعد أساسية فقط)
         function calculateInheritance() {
-            // كود الحساب المحسن (يمكن توسيعه أكثر)
+            let hasChild = document.getElementById('son').checked || document.getElementById('daughter').checked;
+            let husband = document.getElementById('husband').checked;
+            let wife = document.getElementById('wife').checked;
+            let father = document.getElementById('father').checked;
+            let mother = document.getElementById('mother').checked;
+
             let result = [];
-            let hasFar = /* منطق وجود فرع وارث */;
-            // ... (أضف المنطق الكامل)
+
+            if (husband) {
+                result.push(`الزوج: ${hasChild ? 'الربع (١/٤)' : 'النصف (١/٢)'}`);
+            }
+            if (wife) {
+                result.push(`الزوجة: ${hasChild ? 'الثمن (١/٨)' : 'الربع (١/٤)'}`);
+            }
+            if (father) {
+                if (document.getElementById('son').checked) {
+                    result.push('الأب: السدس (١/٦)');
+                } else if (document.getElementById('daughter').checked) {
+                    result.push('الأب: السدس + الباقي تعصيباً');
+                } else {
+                    result.push('الأب: كل التركة (أو الباقي)');
+                }
+            }
+            if (mother) {
+                let siblings = false; // يمكن توسيعها لاحقاً
+                if (hasChild || siblings) {
+                    result.push('الأم: السدس (١/٦)');
+                } else {
+                    result.push('الأم: الثلث (١/٣)');
+                }
+            }
+            if (document.getElementById('daughter').checked && !document.getElementById('son').checked) {
+                let count = parseInt(document.getElementById('daughterCount').value);
+                result.push(`البنات: ${count === 1 ? 'النصف (١/٢)' : 'الثلثان (٢/٣)'}`);
+            }
+            if (document.getElementById('son').checked) {
+                result.push('الأبناء: الباقي تعصيباً (للذكر مثل حظ الأنثيين)');
+            }
+
+            if (result.length === 0) {
+                document.getElementById('result-content').innerHTML = '<p>لا ورثة محددين</p>';
+            } else {
+                document.getElementById('result-content').innerHTML = result.map(r => `<div class="result-item"><span>${r}</span></div>`).join('');
+            }
+
             document.getElementById('result').style.display = 'block';
         }
-        
-        // باقي السكريبتات...
+
+        function resetCalculator() {
+            document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+            document.querySelectorAll('.number-input').forEach(inp => inp.style.display = 'none');
+            document.getElementById('result').style.display = 'none';
+        }
+
+        // إظهار حقل العدد عند اختيار الزوجات أو البنات
+        document.getElementById('wife').onchange = function() {
+            document.getElementById('wifeCount').style.display = this.checked ? 'inline' : 'none';
+        };
+        document.getElementById('son').onchange = function() {
+            document.getElementById('sonCount').style.display = this.checked ? 'inline' : 'none';
+        };
+        document.getElementById('daughter').onchange = function() {
+            document.getElementById('daughterCount').style.display = this.checked ? 'inline' : 'none';
+        };
     </script>
 </body>
 </html>
