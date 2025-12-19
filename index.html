@@ -3,122 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تَوْضِيحُ الْفَرَائِضِ - Справочник</title>
+    <title>توضيح الفرائض السراجية</title>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
-        :root { --primary: #1a4731; --gold: #c4a47c; --white: #ffffff; --bg: #f4f7f6; }
-        body { font-family: 'Amiri', serif; background-color: var(--bg); margin: 0; padding: 0; color: #2d3436; }
+        :root { --primary: #1a4731; --gold: #c4a47c; --white: #ffffff; --bg: #f4f7f6; --text: #2d3436; }
+        body { font-family: 'Amiri', serif; background-color: var(--bg); margin: 0; padding: 0; color: var(--text); line-height: 1.8; }
         header { background: var(--primary); color: white; padding: 40px 20px; text-align: center; border-bottom: 5px solid var(--gold); }
-        header h1 { font-family: 'Tajawal', sans-serif; margin: 0; font-size: 2.2rem; }
-        .container { max-width: 900px; margin: 20px auto; padding: 20px; }
-        .download-area { text-align: center; margin-bottom: 30px; }
-        .btn-pdf { 
-            background: var(--gold); color: var(--primary); border: none; padding: 12px 30px; 
-            border-radius: 50px; font-family: 'Tajawal', sans-serif; font-weight: bold; 
-            cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: 0.3s;
-        }
-        .btn-pdf:hover { transform: translateY(-2px); background: #b3936a; }
-        .card { background: white; border-radius: 12px; padding: 25px; margin-bottom: 20px; border-right: 6px solid var(--primary); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        .card h2 { font-family: 'Tajawal', sans-serif; color: var(--primary); font-size: 1.6rem; margin-top: 0; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; }
-        .item { background: #fdfaf5; padding: 15px; border-radius: 8px; border: 1px solid #f1e9db; }
-        .item strong { color: var(--gold); font-family: 'Tajawal', sans-serif; display: block; margin-bottom: 5px; }
-        .footer { text-align: center; padding: 20px; color: #888; font-size: 0.9rem; }
-        @media print { .download-area { display: none; } body { background: white; } .card { box-shadow: none; border: 1px solid #eee; } }
+        header h1 { font-family: 'Tajawal', sans-serif; margin: 0; font-size: 2.5rem; }
+        header p { font-family: 'Tajawal'; opacity: 0.9; margin-top: 10px; font-size: 1.2rem; }
+        .container { max-width: 1000px; margin: 20px auto; padding: 20px; }
+        .no-print { text-align: center; margin-bottom: 30px; }
+        .btn-pdf { background: var(--gold); color: var(--primary); border: none; padding: 15px 35px; border-radius: 50px; font-family: 'Tajawal', sans-serif; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: 0.3s; font-size: 1.1rem; }
+        .btn-pdf:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+        
+        .card { background: white; border-radius: 15px; padding: 30px; margin-bottom: 25px; border-right: 8px solid var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.08); page-break-inside: avoid; }
+        .card h2 { font-family: 'Tajawal', sans-serif; color: var(--primary); font-size: 1.8rem; margin-top: 0; border-bottom: 2px solid var(--gold); padding-bottom: 10px; margin-bottom: 20px; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .info-box { background: #fdfaf5; padding: 20px; border-radius: 10px; border: 1px solid #f1e9db; height: 100%; }
+        .info-box strong { color: var(--gold); font-family: 'Tajawal', sans-serif; display: block; margin-bottom: 8px; font-size: 1.1rem; }
+        
+        .term-list { list-style: none; padding: 0; }
+        .term-list li { margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px dashed #ddd; }
+        .term-list li:last-child { border: none; }
+        
+        .highlight { color: var(--primary); font-weight: bold; }
+        .step-list { counter-reset: step-counter; list-style: none; padding: 0; }
+        .step-list li { margin-bottom: 15px; padding-right: 45px; position: relative; }
+        .step-list li::before { content: counter(step-counter); counter-increment: step-counter; position: absolute; right: 0; top: 0; width: 30px; height: 30px; background: var(--primary); color: white; border-radius: 50%; text-align: center; line-height: 30px; font-family: 'Tajawal'; font-weight: bold; }
+
+        @media print { .no-print { display: none; } body { background: white; padding: 0; } .container { width: 100%; max-width: none; } .card { box-shadow: none; border: 1px solid #ccc; } }
     </style>
 </head>
 <body>
 
 <header>
     <h1>تَوْضِيحُ الْفَرَائِضِ السِّرَاجِيَّةِ</h1>
-    <p style="font-family: 'Tajawal'; opacity: 0.8;">مُحَمَّد أَنْوَار الْبَدَخْشَانِيِّ</p>
+    <p>تَأْلِيفُ: مُحَمَّد أَنْوَار الْبَدَخْشَانِيِّ</p>
 </header>
 
 <div class="container">
-    <div class="download-area">
-        <button class="btn-pdf" onclick="saveAsPDF()">
-            <i class="fas fa-file-pdf"></i> تحميل الملف بصيغة PDF
+    <div class="no-print">
+        <button class="btn-pdf" onclick="generatePDF()">
+            <i class="fas fa-file-pdf"></i> تحميل الملخص كملف PDF
         </button>
     </div>
 
-    <div id="pdf-content">
+    <div id="content-to-export">
+        <div class="grid">
+            <div class="card">
+                <h2>١. تَعْرِيفُ الْمِيرَاثِ</h2>
+                <div class="info-box">
+                    <p><span class="highlight">لُغَةً:</span> مَصْدَرٌ مِنْ وَرِثَ يَرِثُ، وَمَعْنَاهُ انْتِقَالُ شَيْءٍ مِنْ شَخْصٍ إِلَى شَخْصٍ آخَرَ.</p>
+                    <p><span class="highlight">اِصْطِلَاحًا:</span> عِبَارَةٌ عَنِ انْتِقَالِ مِلْكِ أَحَدٍ بِسَبَبِ الْمَوْتِ إِلَى وَرَثَتِهِ الشَّرْعِيَّةِ.</p>
+                </div>
+            </div>
+            <div class="card">
+                <h2>٢. التَّرِكَةُ</h2>
+                <div class="info-box" style="display: flex; align-items: center;">
+                    <p>هِيَ مَا يَتْرُكُهُ الْمَيِّتُ بَعْدَ الْمَوْتِ مِنَ الْأَمْوَالِ وَالْحُقُوقِ، قَلِيلًا كَانَتْ أَوْ كَثِيرًا.</p>
+                </div>
+            </div>
+        </div>
+
         <div class="card">
-            <h2>١. تَعْرِيفُ الْمِيرَاثِ</h2>
+            <h2>٣. عِلْمُ الْمِيرَاثِ (الْفَرَائِضِ)</h2>
             <div class="grid">
-                <div class="item">
-                    <strong>لُغَةً:</strong>
-                    مَصْدَرٌ مِنْ وَرِثَ يَرِثُ، وَمَعْنَاهُ انْتِقَالُ شَيْءٍ مِنْ شَخْصٍ إِلَى شَخْصٍ آخَرَ، أَوْ مِنْ قَوْمٍ إِلَى قَوْمٍ آخَرِينَ.
+                <div class="info-box">
+                    <strong>تَعْرِيفُهُ:</strong>
+                    عِلْمٌ يُبْحَثُ فِيهِ عَنِ الِانْتِقَالِ مِنْ مِلْكِ الْمَيِّتِ إِلَى وَرَثَتِهِ الْأَحْيَاءِ، وَعَنْ أَحْوَالِهِمْ وَالسِّهَامِ الْمُقَدَّرَةِ.
                 </div>
-                <div class="item">
-                    <strong>اِصْطِلَاحًا:</strong>
-                    عِبَارَةٌ عَنِ انْتِقَالِ مِلْكِ أَحَدٍ بِسَبَبِ الْمَوْتِ إِلَى وَرَثَتِهِ الشَّرْعِيَّةِ.
+                <div class="info-box">
+                    <strong>سَبَبُ التَّسْمِيَةِ:</strong>
+                    لِأَنَّهُ تَعَالَى سَمَّاهُ بِالْفَرِيضَةِ فَقَالَ: {فَرِيضَةً مِنَ اللَّهِ}، وَبِقَوْلِهِ ﷺ: «تَعَلَّمُوا الْفَرَائِضَ».
                 </div>
+            </div>
+            <div class="info-box" style="margin-top:15px;">
+                <p><strong>الْمَوْضُوعُ:</strong> السِّهَامُ الْمُقَدَّرَةُ وَمُسْتَحِقُّوهَا.</p>
+                <p><strong>الْغَايَةُ:</strong> إِيصَالُ الْحُقُوقِ إِلَى مُسْتَحِقِّيهَا، وَحِفْظُ حُقُوقِ الْأَرَامِلِ وَالْأَيْتَامِ.</p>
             </div>
         </div>
 
         <div class="card">
-            <h2>٢. التَّرِكَةُ وَالْفَرَائضُ</h2>
-            <div class="item" style="margin-bottom: 15px;">
-                <strong>التَّرِكَةُ:</strong>
-                هِيَ مَا يَتْرُكُهُ الْمَيِّتُ بَعْدَ الْمَوْتِ مِنَ الْأَمْوَالِ وَالْحُقُوقِ، قَلِيلًا كَانَتْ أَوْ كَثِيرًا.
+            <h2>٥. الْمُصْطَلَحَاتُ الْأَسَاسِيَّةُ</h2>
+            <ul class="term-list">
+                <li><span class="highlight">الْفَرْضُ:</span> النَّصِيبُ الْمُقَدَّرُ شَرْعًا لِلْوَارِثِ (كَالنِّصْفِ وَالرُّبْعِ).</li>
+                <li><span class="highlight">السَّهْمُ:</span> الْجُزْءُ الْمُعَيَّنُ الَّذِي يُعْطَى لِلْوَارِثِ مِنْ أَصْلِ الْمَسْأَلَةِ.</li>
+                <li><span class="highlight">الْفَرْعُ:</span> ابْنُ الْمَيِّتِ وَابْنُ ابْنِهِ، وَبِنْتُهُ وَبِنْتُ ابْنِهِ.</li>
+                <li><span class="highlight">الْأَصْلُ:</span> الْأَبَوَانِ وَالْأَجْدَادُ الصَّحِيحُونَ وَالْجَدَّاتُ الصَّحِيحَاتُ.</li>
+                <li><span class="highlight">الْعَصَبَةُ:</span> مَنْ لَيْسَ لَهُ سَهْمٌ مُقَدَّرٌ، وَيَأْخُذُ مَا بَقِيَ بَعْدَ أَصْحَابِ الْفُرُوضِ.</li>
+            </ul>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h2>٦. أَرْكَانُ الْمِيرَاثِ</h2>
+                <ul class="step-list">
+                    <li>الْمُوَرِّثُ (الْمَيِّتُ)</li>
+                    <li>الْوَارِثُ (الْحَيُّ الْمُسْتَحِقُّ)</li>
+                    <li>الْمَوْرُوثُ (التَّرِكَةُ)</li>
+                </ul>
             </div>
-            <div class="item">
-                <strong>عِلْمُ الْفَرَائِضِ:</strong>
-                هُوَ عِلْمٌ يُبْحَثُ فِيهِ عَنِ الِانْتِقَالِ مِنْ مِلْكِ الْمَيِّتِ إِلَى وَرَثَتِهِ الْأَحْيَاءِ.
+            <div class="card">
+                <h2>٧. أَسْبَابُ الْإِرْثِ</h2>
+                <ul class="step-list">
+                    <li>النَّسَبُ (الْقَرَابَةُ)</li>
+                    <li>النِّكَاحُ (الزَّوْجِيَّةُ)</li>
+                    <li>الْوَلَاءُ (الْعَتَاقَةُ)</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h2>٩. مَوَانِعُ الْإِرْثِ</h2>
+                <ul class="step-list">
+                    <li>الرِّقُّ (الْعُبُودِيَّةُ)</li>
+                    <li>الْقَتْلُ (الْمُوجِبُ لِلْقِصَاصِ)</li>
+                    <li>اخْتِلَافُ الدِّينِ</li>
+                    <li>اخْتِلَافُ الدَّارَيْنِ (لِلْكُفَّارِ)</li>
+                </ul>
             </div>
         </div>
 
         <div class="card">
-            <h2>٣. أَرْكَانُ الْمِيرَاثِ وَأَسْبَابُهُ</h2>
-            <div class="grid">
-                <div class="item">
-                    <strong>أَرْكَانُ الْمِيرَاثِ:</strong>
-                    ١. الْمُوَرِّثُ. ٢. الْوَارِثُ. ٣. الْمَوْرُوثُ.
+            <h2>٨. الْحُقُوقُ الْمُتَعَلِّقَةُ بِالتَّرِكَةِ (مُرَتَّبَةً)</h2>
+            <ol class="step-list">
+                <li><strong>التَّجْهِيزُ وَالتَّكْفِينُ:</strong> مِنْ غَيْرِ تَبْذِيرٍ وَلَا تَقْتِيرٍ.</li>
+                <li><strong>قَضَاءُ الدُّيُونِ:</strong> مِنْ جَمِيعِ مَا بَقِيَ مِنْ مَالِهِ.</li>
+                <li><strong>تَنْفِيذُ الْوَصَايَا:</strong> مِنْ ثُلُثِ مَا بَقِيَ بَعْدَ الدَّيْنِ.</li>
+                <li><strong>تَقْسِيمُ الْمِيرَاثِ:</strong> بَيْنَ الْوَرَثَةِ شَرْعًا.</li>
+            </ol>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h2>١٠. أَقْسَامُ الْعَصَبَةِ</h2>
+                <div class="info-box">
+                    <p>١. <span class="highlight">عَصَبَةٌ بِنَفْسِهِ:</span> كُلُّ ذَكَرٍ لَا تَدْخُلُ فِي نِسْبَتِهِ أُنْثَى.</p>
+                    <p>٢. <span class="highlight">عَصَبَةٌ بِغَيْرِهِ:</span> كُلُّ أُنْثَى صَاحِبَةِ فَرْضٍ صَارَتْ عَصَبَةً بِأَخِيهَا.</p>
+                    <p>٣. <span class="highlight">عَصَبَةٌ مَعَ غَيْرِهِ:</span> كَالْأَخَوَاتِ مَعَ الْبَنَاتِ.</p>
                 </div>
-                <div class="item">
-                    <strong>أَسْبَابُ الْمِيرَاثِ:</strong>
-                    ١. النَّسَبُ (الْقَرَابَةُ). ٢. النِّكَاحُ (الزَّوْجِيَّةُ). ٣. الْوَلَاءُ.
+            </div>
+            <div class="card">
+                <h2>١١. الْحَجْبُ (الْمَنْعُ)</h2>
+                <div class="info-box">
+                    <p><span class="highlight">حَجْبُ نُقْصَانٍ:</span> الِانْتِقَالُ مِنْ نَصِيبٍ أَكْبَرَ إِلَى أَقَلَّ.</p>
+                    <p><span class="highlight">حَجْبُ حِرْمَانٍ:</span> مَنْعُ الْوَارِثِ مِنَ الْمِيرَاثِ كُلِّيَّةً لِوُجُودِ مَنْ هُوَ أَوْلَى مِنْهُ.</p>
                 </div>
             </div>
         </div>
-
-        <div class="card">
-            <h2>٤. الْحُقُوقُ الْمُتَعَلِّقَةُ بِالتَّرِكَةِ</h2>
-            <div style="line-height: 2;">
-                ١. <span style="color: var(--primary); font-weight: bold;">التَّجْهِيزُ وَالتَّكْفِينُ</span><br>
-                ٢. <span style="color: var(--primary); font-weight: bold;">قَضَاءُ الدُّيُونِ</span><br>
-                ٣. <span style="color: var(--primary); font-weight: bold;">تَنْفِيذُ الْوَصَايَا</span> (مِنْ ثُلُثِ مَا بَقِيَ)<br>
-                ٤. <span style="color: var(--primary); font-weight: bold;">تَقْسِيمُ الْمِيرَاثِ</span>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>٥. مَوَانِعُ الْإِرْثِ</h2>
-            <div class="grid">
-                <div class="item">١. الرِّقُّ (كَامِلًا أَوْ نَاقِصًا)</div>
-                <div class="item">٢. الْقَتْلُ (الْمُوجِبُ لِلْقِصَاصِ)</div>
-                <div class="item">٣. اخْتِلَافُ الدِّينِ</div>
-                <div class="item">٤. اخْتِلَافُ الدَّارَيْنِ</div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="footer">
-        تم استخراج هذا النص وتنسيقه من وثيقة المستخدم الأصلية.
     </div>
 </div>
 
 <script>
-    function saveAsPDF() {
-        const element = document.getElementById('pdf-content');
+    function generatePDF() {
+        const element = document.getElementById('content-to-export');
         const opt = {
-            margin: 10,
-            filename: 'Faraid_Clean_Guide.pdf',
-            image: { type: 'jpeg', quality: 1 },
-            html2canvas: { scale: 3, useCORS: true },
-            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            margin:       [10, 10, 10, 10],
+            filename:     'Sharh_Al_Faraid.pdf',
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2, useCORS: true, letterRendering: true },
+            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
         };
         html2pdf().set(opt).from(element).save();
     }
